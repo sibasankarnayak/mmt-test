@@ -1,0 +1,42 @@
+Inputs:
+You are given a schedule of one airline(ivtest-sched.csv).
+Columns are Flight-No, From-airport code, To airport code, start time, end time.
+The start and end times are in HHMM format
+
+Problem:
+You can go from any airport A to any other airport B in the following ways:
+
+-  there might be a direct flight available from A to B
+-  you can take a series of flights from A to B via airports C, D etc 
+
+ Come up with a list of 5 FASTEST (in terms of time) possible ways to get to airport B from airport A.
+ The list must include all direct and one-stop journeys.
+ For one-stop journeys, use any via-airport only ONCE in your solution.
+
+
+Assume that you need a MIN time of 120 minutes to change flights at an intermediate airport. In other words, if one of your solutions happen to be a 1-stop flight (say DEL --> AMD --> BOM), and you happen to land in AMD from DEL at say 9 AM, you have to pick a flight from AMD --> BOM which departs at a MINIMUM, AFTER 11 AM.
+
+ The format of the result list should be as follows:
+
+ For example: if you are traveling from ATQ to BLR the resultant list (of 5) would be as follows:
+-  [{'ATQ_BLR': {'6845': 185}}, {'ATQ_DEL_BLR': {'2057_819': 365}, 'ATQ_BOM_BLR': {'6261_283': 475}, 'ATQ_CCU_BLR': {'5926_932': 555}, 'ATQ_PNQ_BLR': {'286_954': 1120}}]
+-  Similarly, IXC to COK will yield: -
+-  [{'IXC_DEL_COK': {'2409_2123': 375}, 'IXC_BLR_COK': {'593_463': 410}, 'IXC_BOM_COK': {'264_832': 610}, 'IXC_CCU_COK': {'376_6162': 875}, 'IXC_MAA_COK': {'549_327': 965}}]
+
+As you can see in the example list, the first item in the array is a direct flight from ATQ_BLR, the flight number being 6845 and it takes 185 mins to get from ATQ to BLR
+ Similarly, the second item is a flight via DEL and the flight combinations are flight no 2057 from ATQ to DEL and flight no 819 from DEL to BLR and this takes a total of 365 mins including the flying time of ATQ --> DEL and DEL --> BLR and this includes whatever time is spent in DEL (including the MIN connecting time of 120 mins) to catch the flight to BLR.
+Another example IXC --> GAU will yield: -
+-  [{'IXC_GAU': {'717': 220}}, {'IXC_DEL_GAU': {'2152_694': 335}, 'IXC_CCU_GAU': {'376_833': 495}, 'IXC_BLR_GAU': {'591_457': 760}, 'IXC_HYD_GAU': {'615_6538': 795}}]
+
+ Expectations: -
+-  There should be a simple RESTful api using springboot to test the input and output the list described above.
+-  Make sure that you have WORKING and DEMONSTRATABLE code. Please TEST your code against the examples given above (ATQ_BLR, IXC_COK, IXC_GAU)
+-  Make sure that the code is functionally correct.
+-  Separation of concern should be addressed. Code should be modular and readable.
+
+
+ Points to note:
+-  there might be multiple direct flights between two airports
+-  a flight might leave close to midnight and reach next morning (very important)
+-  assume all flights are available on all days
+-  please email the code to satish.mani@go-mmt.com
